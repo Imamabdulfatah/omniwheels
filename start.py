@@ -191,6 +191,17 @@ def berhenti():
     GPIO.output(motorC2, GPIO.LOW)
     return render_template('index.html', ip=ip)
 
+@app.route('/shutdown')
+def shutdown():
+    try:
+        # Run the shutdown command
+        subprocess.run(['sudo', 'shutdown', '-h', 'now'])
+    except Exception as e:
+        print(f"Error: {e}")
+
+    return render_template('index.html', ip=ip)
+shutdown()
+
 # Route parameter video feed / untuk melihat video
 @app.route("/video_feed")
 def video_feed():
